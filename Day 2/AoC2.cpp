@@ -43,5 +43,6 @@ int main() {
     cout << "Part one: " << (depth*displacement) << endl;
     cout << "Part two: " << (depth2*displacement2) << endl;
 
+    file.close();
     return 0;
 }

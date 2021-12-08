@@ -41,28 +41,56 @@ int main() {
             gamma |= 1 << (width - i - 1);
         }
     }
-    /*
+    
     vector<string> oxygen_vector{lines.begin(),lines.end()};
-    int ones = 0;
-    for(int i = 0; i < width; i++) {
+    vector<string> co2_vector{lines.begin(),lines.end()};
+    vector<string> temp;
+    for(int i = 0; oxygen_vector.size() > 1; i++) {
+        temp.clear();
+        int zeros = 0;
+        int ones = 0;
         for(int j = 0; j < oxygen_vector.size(); j++) {
-            if((oxygen_vector[j])[i] == '1') {
+            if(oxygen_vector[j][i] == '0') {
+                zeros++;
+            }else {
                 ones++;
             }
         }
-        char target = '0'+(ones > (oxygen_vector.size()-ones));
-        vector<string> newvector;
-        for(int k = oxygen_vector.size(); k >= 0; k--) {
-            if((oxygen_vector[k])[i] == target) {
-                newvector.push_back(oxygen_vector[k]);
+        char most_common = '0';
+        if(ones >= zeros) most_common = '1';
+        for(int j = 0; j < oxygen_vector.size(); j++) {
+            if(oxygen_vector[j][i] == most_common) {
+                temp.push_back(oxygen_vector[j]);
             }
         }
-        oxygen_vector = newvector;
+        oxygen_vector = temp;
     }
-    cout << oxygen_vector[0] << endl;
-    */
+
+    for(int i = 0; co2_vector.size() > 1; i++) {
+        temp.clear();
+        int zeros = 0;
+        int ones = 0;
+        for(int j = 0; j < co2_vector.size(); j++) {
+            if(co2_vector[j][i] == '0') {
+                zeros++;
+            }else {
+                ones++;
+            }
+        }
+        char least_common = '1';
+        if(zeros <= ones) least_common = '0';
+        for(int j = 0; j < co2_vector.size(); j++) {
+            if(co2_vector[j][i] == least_common) {
+                temp.push_back(co2_vector[j]);
+            }
+        }
+        co2_vector = temp;
+    }
+
+    int oxygen = stoi(oxygen_vector[0],0,2);
+    int co2 = stoi(co2_vector[0],0,2);
 
     cout << "Part one: " << (delta * gamma) << endl;
-    cout << "Part two: To be implemented..." << endl;
+    cout << "Part two: " << (oxygen*co2) << endl;
     return 0;
 }
